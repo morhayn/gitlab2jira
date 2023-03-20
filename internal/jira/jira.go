@@ -8,9 +8,10 @@ import (
 )
 
 var Tocken string
+var UrlJira string
 
 func SendComment(ticket, gitlink, message, state, username string) {
-	jiraURL := "https://jira.phoenixit.ru/"
+	jiraURL := UrlJira
 
 	// See "Using Personal Access Tokens"
 	// https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html
