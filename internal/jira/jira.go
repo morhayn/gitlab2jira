@@ -30,16 +30,11 @@ func SendComment(ticket, gitlink, message, state, username string) {
 		fmt.Println(err)
 		return
 	}
-	// fmt.Println("Get issue ", issues)
 	comment := j.Comment{
 		Body: fmt.Sprintf("Owner: %s \n State: %s \n Gitlab: %s \n Description: %s", username, state, gitlink, message),
 	}
-	// fmt.Println(comment)
 	_, _, err = client.Issue.AddComment(context.Background(), ticket, &comment)
 	if err != nil {
 		fmt.Println("ERROR -- ", err)
 	}
-	// fmt.Println("-----------------")
-	// fmt.Println(cmnt)
-	// fmt.Println(resp)
 }

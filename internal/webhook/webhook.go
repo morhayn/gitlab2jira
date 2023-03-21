@@ -66,18 +66,6 @@ func (hook webhook) ServeHTTP(writer http.ResponseWriter, request *http.Request)
 	writer.WriteHeader(204)
 }
 
-// func (hook webhook) handle(event interface{}) error {
-// str, err := json.Marshal(event)
-// if err != nil {
-// return fmt.Errorf("could not marshal json event for logging: %v", err)
-// }
-
-// Just write the event for this example.
-// fmt.Println(string(str))
-
-// return nil
-// }
-
 // parse verifies and parses the events specified in the request and
 // returns the parsed event or an error.
 func (hook webhook) parse(r *http.Request) (gitlab.EventType, error) {
@@ -128,11 +116,9 @@ func MergeWebhook(r *http.Request) error {
 		matchTitle := re.FindStringSubmatch(attr.Title)
 		if len(matchDesc) > 1 {
 			ticket := matchDesc[1]
-			// fmt.Println("Find in Descr - ", ticket, attr.Description)
 			jira.SendComment(ticket, attr.URL, attr.Description, attr.State, push.User.Name)
 		} else if len(matchTitle) > 1 {
 			ticket := matchTitle[1]
-			// fmt.Println("Find in Title - ", ticket, attr.Title)
 			jira.SendComment(ticket, attr.URL, attr.Title, attr.State, push.User.Name)
 		}
 	}
