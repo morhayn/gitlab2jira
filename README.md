@@ -1,4 +1,9 @@
 ### gitlab2jira
+### System env
+- Gital tocken - GITLAB_TOCKEN
+- jira tocken - JIRA_TOCKEN
+- jira url - JIRA_URL
+
 Build command
 ```
 export GITLAB="WEBHOOK GITLAB" && \
