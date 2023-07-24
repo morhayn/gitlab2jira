@@ -3,17 +3,21 @@ package telegram
 import (
 	"log"
 
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
+var Tocken string
+var Channel int64 = -1001514590541
+
 type Client struct {
-	bot *tgbotapi.BotApi
+	bot *tgbotapi.BotAPI
 }
 
-func New(apiKey string) *Client {
-	bot, err := tgbotapi.NewBotAPI(apiKey)
+func New() *Client {
+	// fmt.Println("Tocken", Tocken)
+	bot, err := tgbotapi.NewBotAPI(Tocken)
 	if err != nil {
-		log.Panic(err)
+		log.Panic("!!!", err)
 	}
 
 	return &Client{
@@ -22,8 +26,8 @@ func New(apiKey string) *Client {
 }
 
 func (c *Client) SendMessage(text string, chatId int64) error {
-	msg := tgbotapi.NewMessage(chatId, text)
-	msg.ParseMode = "Markdown"
+	msg := tgbotapi.NewMessage(Channel, text)
+	msg.ParseMode = "markdown"
 	_, err := c.bot.Send(msg)
 	return err
 }
